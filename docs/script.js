@@ -444,7 +444,7 @@ function createArticleHTML(article, articleNumber) {
     // Usamos el ID del artículo como el contenido del número (como lo hacía tu initializeArticleNumbers).
     html += `<span class="article-number">${articleId}</span>`; 
 
-    html += `<img src="docs/Bazar/${articleId}.jpg" alt="${article.description}">`;
+    html += `<img src="Bazar/${articleId}.jpg" alt="${article.description}">`;
     html += '</div>';
     html += `<p class="description">${article.description}</p>`;
     html += `<ul class="details">`;
