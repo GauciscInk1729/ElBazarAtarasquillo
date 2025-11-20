@@ -442,9 +442,9 @@ function createArticleHTML(article, articleNumber) {
     
     // **CORRECCIÓN CLAVE:** Inyectar el span del número de artículo aquí.
     // Usamos el ID del artículo como el contenido del número (como lo hacía tu initializeArticleNumbers).
-    html += `<span class="article-number">${articleId}</span>`; 
-
-    html += `<img src="Bazar/${articleId}.jpg" alt="${article.description}">`;
+    html+='<div class="loader"></div>';
+    html += `<img src="Bazar/${articleId}.jpg" alt="${article.description}" loading="lazy">`;
+        html += `<span class="article-number">${articleId}</span>`; 
     html += '</div>';
     html += `<p class="description">${article.description}</p>`;
     html += `<ul class="details">`;
@@ -487,8 +487,7 @@ function loadArticles(reset = false, filter = 'all') {
 
     const startIndex = currentPage * ITEMS_PER_PAGE;
     const endIndex = startIndex + ITEMS_PER_PAGE;
-    
-    // Si ya no hay más artículos para cargar, salir
+
     if (startIndex >= filteredArticles.length) {
         return;
     }
@@ -496,16 +495,24 @@ function loadArticles(reset = false, filter = 'all') {
     const articlesToLoad = filteredArticles.slice(startIndex, endIndex);
 
     let htmlContent = '';
-    articlesToLoad.forEach((article, index) => {
-        // Usamos el índice general del artículo en la lista *completa* para el número de artículo.
+    articlesToLoad.forEach(article => {
         const articleIndexInAll = ALL_ARTICLES.indexOf(article) + 1;
         htmlContent += createArticleHTML(article, articleIndexInAll);
     });
 
     articlesGrid.insertAdjacentHTML('beforeend', htmlContent);
+
+    // ⬇️ INICIALIZAR TODOS LOS NUEVOS WRAPPERS
+    const newWrappers = articlesGrid.querySelectorAll(".image-container:not(.init)");
+    newWrappers.forEach(wrapper => {
+        wrapper.classList.add("init");
+        initImageWrapper(wrapper);
+    });
+
     currentPage++;
     articlesInDOM += articlesToLoad.length;
 }
+
 
 // --- 3. DETECCIÓN DE SCROLL ---
 
@@ -578,3 +585,25 @@ function filterArticles() {
     });
 }
 
+function initImageWrapper(wrapper) {
+    const img = wrapper.querySelector("img");
+    const loader = wrapper.querySelector(".loader");
+
+    if (!img) return;
+
+    const finishLoad = () => {
+        img.classList.add("loaded");
+        wrapper.classList.add("loaded");
+    };
+
+    // Si la imagen ya está cargada (cache)
+    if (img.complete) {
+        finishLoad();
+    } else {
+        img.addEventListener("load", finishLoad, { once: true });
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".image-container").forEach(initImageWrapper);
+});
