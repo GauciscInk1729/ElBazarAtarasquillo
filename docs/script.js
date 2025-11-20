@@ -443,7 +443,7 @@ function createArticleHTML(article, articleNumber) {
     // **CORRECCIÓN CLAVE:** Inyectar el span del número de artículo aquí.
     // Usamos el ID del artículo como el contenido del número (como lo hacía tu initializeArticleNumbers).
     html+='<div class="loader"></div>';
-    html += `<img src="Bazar/${articleId}.jpg" alt="${article.description}" loading="lazy">`;
+    html += `<img src="Bazar_web_img_reducidas_webp/${articleId}.webp" alt="${article.description}" loading="lazy">`;
         html += `<span class="article-number">${articleId}</span>`; 
     html += '</div>';
     html += `<p class="description">${article.description}</p>`;
