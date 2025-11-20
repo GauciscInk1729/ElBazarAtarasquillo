@@ -170,6 +170,20 @@ body {
     border: 2px solid black; /* Borde para un estilo moderno */
 }
 
+.menu-toggle {
+    display: none;
+}
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
 /* --- Responsividad --- */
 @media (max-width: 992px) {
     .articles-grid {
@@ -181,7 +195,76 @@ body {
         width: 250px;
     }
 }
+@media (max-width: 768px) {
+    .category-menu{
+        overflow: hidden;
+        transition: transform 0.3s ease-in-out, height 0.3s ease-in-out;
+    }
+    .category-menu.hidden {
+    /* Mueve la barra fuera de la vista hacia arriba */
+    transform: translateY(-100%);
+    height: 0;
+    padding: 0;
+    margin:0;
+    opacity: 0;
+}
+    .logo {
+        font-size: 1.1em;
+    }
+    .category-button{
+        font-size: 0.7em;
+    }
+    /* 1. Ocultar todos los botones normales de categoría por defecto */
+    .category-list {
+        display: none;
+        flex-direction: column; /* Apilar verticalmente */
+        width: 100%; /* Ocupar todo el ancho disponible */
+        position: absolute; /* Para que se superponga al contenido */
+        z-index: 10; /* Asegurar que esté por encima de otros elementos */
+        background-color: white; /* Color de fondo del desplegable */
+        border: 1px solid #ccc;
+    }
 
+    /* 2. Mostrar la lista de categorías cuando el menú esté "abierto" */
+    .category-menu.open .category-list {
+        display: flex; /* Muestra los botones apilados */
+    }
+    
+    /* 3. Mostrar el botón de alternancia */
+    .menu-toggle {
+        display: block; /* Mostrar el botón de menú */
+        width: 100%;
+        padding: 15px;
+        text-align: left;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+    /* 4. Estilo de los botones dentro del menú desplegable */
+    .category-list .category-button {
+        width: 100%;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+    .menu-toggle {
+       /* display: flex; /* Usar flexbox para centrar el SVG */
+        align-items: center; /* Centrar verticalmente */
+        justify-content: center; /* Centrar horizontalmente */
+        /* Puedes ajustar el padding si el icono es muy grande */
+        padding: 10px; 
+        /* Si tenías un texto, considera eliminar 'text-align: left;' */
+        text-align: center; 
+    }
+
+    .hamburger-icon svg {
+        width: 30px;  /* Ajusta el tamaño del icono SVG */
+        height: 30px; /* Ajusta el tamaño del icono SVG */
+        color: #333; /* Color del icono (puedes cambiarlo) */
+        display: block; /* Asegura que el SVG se comporte como un bloque */
+    }
+}
 @media (max-width: 600px) {
         .logo {
         font-size: 1.1em;

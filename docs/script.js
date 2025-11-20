@@ -593,3 +593,85 @@ function initImageWrapper(wrapper) {
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".image-container").forEach(initImageWrapper);
 });
+function toggleMenu() {
+    const navElement = document.getElementById('categoryMenu');
+    const toggleButton = navElement.querySelector('.menu-toggle');
+    const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true' || false;
+
+    // Alternar la clase 'open' en el NAV
+    navElement.classList.toggle('open');
+    
+    // Actualizar el atributo ARIA para accesibilidad
+    toggleButton.setAttribute('aria-expanded', !isExpanded);
+}
+let lastScrollY = window.scrollY;
+const categoryMenu = document.getElementById('categoryMenu');
+const headerContent = document.querySelector('.header-content'); // El contenedor del logo y la búsqueda
+
+window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    
+    // Altura fija del encabezado principal (logo + búsqueda)
+    const headerHeight = headerContent.offsetHeight; 
+    
+    // --- Lógica para Ocultar/Mostrar ---
+
+    if (currentScrollY > lastScrollY && currentScrollY > headerHeight) {
+        // SCROLL HACIA ABAJO y ya pasó la altura del encabezado principal
+        
+        // 1. Ocultar el menú (se aplica height: 0 por el CSS)
+        categoryMenu.classList.add('hidden');
+        
+    } else if (currentScrollY < lastScrollY) {
+        // SCROLL HACIA ARRIBA
+        
+        // 1. Mostrar el menú
+        categoryMenu.classList.remove('hidden');
+    }
+    
+    // Actualiza la posición de scroll anterior
+    lastScrollY = currentScrollY;
+});
+
+// Asegúrate de que el menú se muestre al inicio
+categoryMenu.classList.remove('hidden');
+/*
+let lastScrollY = window.scrollY; // Variable para almacenar la posición de scroll anterior
+const categoryMenu = document.getElementById('categoryMenu'); // Obtén el elemento del menú
+
+window.addEventListener('scroll', () => {
+    // Posición de scroll actual
+    const currentScrollY = window.scrollY;
+
+    // Altura del encabezado principal (ajusta si es necesario)
+    const headerHeight = document.querySelector('.header-content').offsetHeight; 
+    
+    // Altura de la barra de categorías
+    const menuHeight = categoryMenu.offsetHeight; 
+
+    // Punto donde la barra de categorías estaría completamente fuera de la pantalla
+    const hideThreshold = headerHeight + menuHeight; 
+    
+    // --- Lógica para Ocultar/Mostrar ---
+
+    if (currentScrollY > lastScrollY && currentScrollY > hideThreshold) {
+        // SCROLL HACIA ABAJO y ya pasó la altura inicial del menú + encabezado
+        // Ocultar la barra de categorías
+        categoryMenu.classList.add('hidden');
+    } else if (currentScrollY < lastScrollY) {
+        // SCROLL HACIA ARRIBA
+        // Mostrar la barra de categorías
+        categoryMenu.classList.remove('hidden');
+    }
+    
+    // Actualiza la posición de scroll anterior para la siguiente comprobación
+    lastScrollY = currentScrollY;
+});
+
+// Asegúrate de que el menú se muestre si el usuario está en la parte superior
+window.addEventListener('load', () => {
+    if (window.scrollY === 0) {
+        categoryMenu.classList.remove('hidden');
+    }
+});
+*/
