@@ -158,7 +158,7 @@ const ALL_ARTICLES = [
 
 { category:"Mujer", description:"Suerte largo naranja estampado", idx:"78", status:"disponible", marca:" Grifflin Paris", talla:" M", precio:" 80" },
 
-{ category:"Mujer", description:" Chamarra palo de rosa con gorro", idx:"79", status:"disponible", marca:"Greenlander", talla:"28", precio:"8100" },
+{ category:"Mujer", description:" Chamarra palo de rosa con gorro", idx:"79", status:"disponible", marca:"Greenlander", talla:"28", precio:"100" },
 
 { category:"Mujer", description:" Saco Dama  a cuadros morado con negro", idx:"80", status:"disponible", marca:" IVONE", talla:" 28", precio:"100" },
 
