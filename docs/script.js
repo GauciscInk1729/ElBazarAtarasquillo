@@ -675,3 +675,44 @@ window.addEventListener('load', () => {
     }
 });
 */
+
+// --- Location modal handlers ---
+function openLocationModal() {
+    const modal = document.getElementById('locationModal');
+    if (!modal) return;
+    const iframe = document.getElementById('locationMap');
+    const lat = modal.dataset.lat || '';
+    const lng = modal.dataset.lng || '';
+    const query = modal.dataset.query || '';
+    if (lat && lng) {
+        iframe.src = `https://www.google.com/maps?q=${lat},${lng}&z=15&output=embed`;
+        const openLink = document.getElementById('openInMaps');
+        if (openLink) openLink.href = `https://www.google.com/maps?q=${lat},${lng}`;
+    } else if (query) {
+        iframe.src = `https://www.google.com/maps?q=${encodeURIComponent(query)}&z=15&output=embed`;
+        const openLink = document.getElementById('openInMaps');
+        if (openLink) openLink.href = `https://www.google.com/maps?q=${encodeURIComponent(query)}`;
+    }
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLocationModal() {
+    const modal = document.getElementById('locationModal');
+    if (!modal) return;
+    const iframe = document.getElementById('locationMap');
+    if (iframe) iframe.src = '';
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('locationButton');
+    if (btn) btn.addEventListener('click', openLocationModal);
+    const modal = document.getElementById('locationModal');
+    if (modal) {
+        const closeBtn = modal.querySelector('.modal-close');
+        if (closeBtn) closeBtn.addEventListener('click', closeLocationModal);
+        modal.addEventListener('click', function(e){ if (e.target === modal) closeLocationModal(); });
+    }
+});

@@ -22,6 +22,7 @@
             <button class="category-button" onclick="filterByCategory('Hombre', this)">Hombre</button>
             <button class="category-button" onclick="filterByCategory('nino', this)">Niño</button>
             <button class="category-button" onclick="filterByCategory('nina',this)">Niña</button>
+            <button id="locationButton" class="category-button" title="Ver ubicación">Ubicación 📍</button>
         </nav>
         
     </header>
@@ -32,5 +33,20 @@
     </main>
 
     <script src="script.js"></script>
+    <!-- Location modal -->
+    <div id="locationModal" class="modal hidden" data-lat="19.32118071519976" data-lng="-99.46096397322084" data-query="Zapata 2, Lerma, San Mateo Atarasquillo">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Cerrar">✕</button>
+            <h2>Ubicación de El Bazar Atarasquillo</h2>
+            <div class="location-details">
+                <p><strong>Dirección:</strong> Lerma, San Mateo Atarasquillo Zapata 2. A un costado de Tortimax</p>
+                <p><strong>Teléfono:</strong> 722846253</p>
+                <p><a href="#" id="openInMaps" target="_blank">Abrir en Google Maps</a></p>
+            </div>
+            <div class="map-embed">
+                <iframe id="locationMap" src="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
