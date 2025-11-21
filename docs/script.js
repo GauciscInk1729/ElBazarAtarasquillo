@@ -378,7 +378,7 @@ const ALL_ARTICLES = [
 
 { category:"nino", description:" Pantalon de Pana gris Niño", idx:"188", status:"disponible", marca:" ", talla:"18 24 month" },
 
-{ category:"nino", description:" Chaleco azul marino Niño", idx:"189", status:"disponible", marca:" ", talla:"2 anos" },
+{ category:"nino", description:" Chaleco azul marino Niño", idx:"189", status:"disponible", marca:" ", talla:"2 años" },
 
 { category:"nino", description:" Polo amarillo Niño", idx:"190", status:"disponible", marca:" ", talla:"2 anos" },
 
